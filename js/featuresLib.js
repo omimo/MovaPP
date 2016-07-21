@@ -226,6 +226,32 @@ var f_SMPL_Ann = {
 		data: [ ]
 };
 
+var f_Mayo = {
+		label: "Mayo Acc",
+		type: "bipolar",
+		unit: "cm/s^3",
+		range: [-100,-80,-60,-40,-20,1,20,40,60,80,100],
+		rangelabels: ['<-100',-80,-60,-40,-20,0,20,40,60,80,'>100'],
+//		range: [-1000,-900,-800,-700,-600,-500,-400,-300,-200,-100,-1,1,100,200,300,400,500,600,700,800,900,1000],
+//		rangelabels: ['<-1000','',-800,'',-600,'',-400,'',-200,'','',0,'',200,'',400,'',600,'',800,'','>1000'],
+		colormap : function(v){
+			if (v>100) v = 100;
+			if (v<-100) v = -100;
+			var val = Math.round(v/20)+6;
+			return colorbrewer2_div_11_PRGn[11-val];
+			},
+		colormap2 : function(v){
+			if (v>1000) v = 1000;
+			if (v<-1000) v = -1000;
+
+			if (v>0)
+				return d3.hsl(45,1,0.9-(v/1200));
+			else
+				return d3.hsl(145,1,0.9-(-v/1200));
+			},
+		data: [ ]
+};
+
 function makeRandomFeature(frames, skips) {
 	var data = [];
 	var dCount = 0;
@@ -1038,6 +1064,37 @@ function readAnn2 (frames, skips, joint, filename) {
 		unparsedAnn += "23837.5 24887.2 Flick\n";
 		unparsedAnn += "24887.2 30835.6 Press\n";
 		unparsedAnn += "30835.6 33136.0 None\n";
+
+	var data = d3.dsv(" ").parseRows(unparsedAnn);
+
+	// put joints together
+	annotes = data.map(function(d) {
+		var ann = [];
+		ann.start = d[0];
+		ann.end = d[1];
+		ann.label = d[2];
+
+		return ann;
+	});
+
+	var annotes_frame = [];
+
+	for (i=0; i<annotes.length; i++) {
+		annotes_frame[i] = [];
+		annotes_frame[i][0] = Math.round((annotes[i].start / framelength)/skips);
+		annotes_frame[i][1] = Math.round((annotes[i].end / framelength)/skips);
+		annotes_frame[i][2] = annotes[i].label;
+	}
+	console.log(annotes);
+	console.log(annotes_frame);
+	return annotes_frame;
+}
+
+function readAnn2 (frames, skips, joint, filename) {
+	var data = [];
+	var dCount = 0;
+	var framelength = 1.0/120.0 * 1000; //framelength in milliseconds
+
 
 	var data = d3.dsv(" ").parseRows(unparsedAnn);
 

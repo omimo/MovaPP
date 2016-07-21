@@ -7,12 +7,12 @@ var setSizes = function() {
   }
 
   //TODO: subtract the size of the annotation track below
-  $("#canCont").height($(document).height() - 150 - $("#footer").height());
+  $("#canCont").height($(document).height()  - 10 - $("#footer").height());
 
 
   if (movan.sidebyside == 1) {
-    $("#lefttabs").width(($(document).width() - $("#legends").width() - 60)/2 - 10);
-    $("#righttabs").width(($(document).width() - $("#legends").width() - 60)/2 - 10);
+    $("#lefttabs").width(($(document).width() - 10)/2 - 10);
+    $("#righttabs").width(($(document).width() - 10)/2 - 10);
     $("#righttabs").show();
   }
   else {
@@ -20,7 +20,7 @@ var setSizes = function() {
     $("#righttabs").hide();
   }
 
-  $("#lefttabs").height($("#canCont").height() - $("#annotation-area").height());
+  $("#lefttabs").height($("#canCont").height());
   $("#featureList").height($("#lefttabs").height() - $("#left-tabs-container").height() - 40);
   $("#divider").height($("#lefttabs").height());
   $("#righttabs").height($("#lefttabs").height());
@@ -31,11 +31,11 @@ var setSizes = function() {
 
 $(document).ready(function() {
 
-  $("#lefttabs").tabs().click(function(event, ui) {
-    $("#featureList").scrollLeft(0);
-  });
+  // $("#lefttabs").tabs().click(function(event, ui) {
+  //   $("#featureList").scrollLeft(0);
+  // });
 
-  $("#righttabs").tabs();
+  // $("#righttabs").tabs();
 
   $("#open-close").click(function(event) {
     if (movan.sidebyside == 0) {

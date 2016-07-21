@@ -126,22 +126,8 @@
 	</head>
 	<body>
 	<script type="text/javascript" src="js/ui.js"></script>
-		<div id="header" style="clear:both;">
-			<h1 style="float: left;">Mova: Movement Analytics Platform</h1>
-			<h4 style="float: right;">Version 0.7  |   <a href="Mova_Intro.mov" target="_blank">Video Intro</a></h4>
-		</div>
-
 		<div id="canCont">
-			<div id="lefttabs">
-				<ul>
-					<li>
-						<a href="#figure">Figure Sketch</a>
-					</li>
-					<li>
-						<a href="#anim">Animation</a>
-					</li>
-				</ul>
-
+			<div id="lefttabs">				
 				<!-- tabs-container is used here to ensure that #featureList does not appear
 					before the content of dynamically added tabs -->
 				<div id="left-tabs-container">
@@ -176,13 +162,13 @@
 				</div>
 			</div>
 
-			<div id="legends">
+			<div id="legends" style="width:0px;display:none">
 				<div style="font-family: Verdana, Arial, sans-serif;font-weight: bold;font-size: 11.5pt;padding-bottom: 5px;">
 					Legends:
 				</div>
 			</div>
 
-			<div id="annotation-area">
+			<div id="annotation-area" style="display: none;height:0px;">
 				<div id="controls-wrapper" style="display: table; margin: 0 auto; padding-top: 15px">
 					<div>
 						<div style="display: inline-block;" id="open-close">
@@ -199,7 +185,7 @@
 					</div>
 				</div>
 				<div id='timeZoomRatioSlider'></div>
-				<div id='svg-container-div'>
+				<div id='svg-container-div' style="display: none">
 				    <svg id="svg-container" width="900" height="200" style="margin-left: 10px;"></svg>
 				    <div id="annotation-graph-dialog">
 				    	<div>
@@ -238,14 +224,8 @@
 					</div>
 					<select name="drop1" id="fileSelect" size="4" multiple="multiple"
 					onchange="movan.loadNew()" style="border:2px solid #ccc; width:200px; height: 120px; overflow-y: auto;">
-					 <option value="movs/MS2_8Walk_M_nopos.bvh" selected="selected">MS2_8Walk_M_nopos.bvh</option>
-						<option value="movs/Slash_x4_0001KAREN.bvh">Slash_x4_0001KAREN.bvh</option>
-						<option value="movs/MS2_8Walk_M.bvh">MS2_8Walk_M.bvh</option>
-						<option value="Dab1.csv">Dab1.bvh</option>
-						<option value="Flick1.csv">Flick1.bvh</option>
-						<option value="Slash4.csv">Slash4.bvh</option>
-						<option value="Glide3.csv">Glide3.bvh</option>
-						<option value="Wring2.csv">Wring2.bvh</option>
+					 <option value="movs/2015-11-27_12-07-39-anotnio-improv.bvh" selected="selected">Antonio</option>
+						<option value="movs/2015-11-27_12-07-39-bevin-improv.bvh">Bevin</option>												
 					</select>
 
 				</div>
@@ -311,25 +291,13 @@
 
 		</script>
 
-		<script type="text/javascript">
-			//url: "http://cgi.sfu.ca/~oalemi/movan/srv/upload.php",
-			$(function() {
-				$('#fileupload').fileupload({
-					dataType : 'csv',
-					done : function(e, data) {
-						console.log(data);
-						$.each(data.result.files, function(index, file) {
-							$('<p/>').text(file.name).appendTo(document.body);
-						});
-					}
-				});
-			});
-		</script>
-		<div id="footer" style="clear:both;text-align:center;padding-top:20px;">
+	
+		<div id="footer" style="clear:both;text-align:center;padding-top:2px;">
 			<small>(C) Omid Alemi - Fall 2013</small>
 		</div>
 
 			<script>
+				movan.sidebyside = 0;
 			var rightPlayers = [];
 			state = {
 				playing: false,
@@ -656,6 +624,14 @@
 				$("#link").hide();
 				$("#divider-btn-open").hide();
 				initAnnotation();
+
+////////////////////////////////
+
+	movan.loadNew();
+
+	
+
+
 			});
 		</script>
  </body>

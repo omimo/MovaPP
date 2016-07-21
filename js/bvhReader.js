@@ -7,7 +7,7 @@ var BVHReader = function () {
             var jointStack = dataReturn[0];
             var jointMap = dataReturn[1];
             var jointArray = dataReturn[2];
-            var connectivityMatrix = dataReturn[3]
+            var connectivityMatrix = dataReturn[3];
             if (callback)
                 callback(new BVHReader.BVH.Skeleton(jointStack[0], jointMap, jointArray, dataReturn[3], dataReturn[4], dataReturn[5], dataReturn[6]),'BVH');
         });
@@ -78,8 +78,8 @@ var BVHReader = function () {
 
         } else if (line.indexOf("{") === 0) {
 
-        } else if (line.indexOf("OFFSET") === 0) {
-            var parts = line.split(" ");
+        } else if (line.indexOf("OFFSET") === 0) {                    
+            var parts = line.split(' ');             
             jointStack[jointStack.length - 1]["offset"] = parts.slice(1);
             for(x in jointStack[jointStack.length - 1]["offset"]){
                 jointStack[jointStack.length - 1]["offset"][x] = +jointStack[jointStack.length - 1]["offset"][x]

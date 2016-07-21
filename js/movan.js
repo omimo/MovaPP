@@ -17,7 +17,7 @@ var movan = {
 			 //skelHeadJoint : 23,
 			 frameSkip : 5,
 
-			figureScale: 2, //TODO: Need to add a scale control in the GUI (or automatic detection)
+			figureScale: 0.8, //TODO: Need to add a scale control in the GUI (or automatic detection)
 
 
 			availableFeatures : [
@@ -30,7 +30,8 @@ var movan = {
 							[f_weight,calcWeight_K,1],
 							[f_time,calcTime_K,1],
 							[f_flow,calcFlow_K,1],
-							[f_BEA_Ann,readAnn2,1]
+							[f_BEA_Ann,readAnn2,1],
+							// [f_Mayo,readAnn2,1]
 							],
 
 			selectedFeats : [],
@@ -58,128 +59,143 @@ var movan = {
 
 			fillDefaultFeatures: function () {
 				movan.selectedFeats = [];
+
+				posFrameArray = [];
+				for (f=0;f<track.frameCount;f++) {
+				posFrameArray[f] = track.getPositionsAt(f);
+				}
+				track = movan.dataTracks[movan.dataTracks.length - 1].content;
+
 				var len = movan.selectedFeats.length;
+				
 
-				/*
-				var sel =9;
-				var joint = 11;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var joint = 34;
+				var sel =0;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
+
+				len++;
+
+				var sel =1;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
+				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
+
+				len++;
+
+				var sel =2;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
+				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
 
-				var joint = 18;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var joint = 10;
+				sel = 0;
+			    movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var sel =1;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 1;
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var sel =2;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 2;
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				sel = 0;
+				var joint = 57;
+			    movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 4;  //direct segments
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var sel =1;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 5; //space
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var sel =2;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 6; //weight
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				sel = 0;
+				var joint = 62;
+			    movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 7;  //time
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var sel =1;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
 
-				var sel = 8;  //flow
-				var joint = 19;
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
+				var sel =2;				
+				movan.selectedFeats[len] = [];
+				movan.selectedFeats[len].id = len;
+				movan.selectedFeats[len].featID = sel;
 				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,0);
-				movan.selectedFeats[len].joint = joint;
+				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				movan.selectedFeats[len].joint = track.jointArray[joint];
 
 				len++;
-
-				var sel = 9;  //BEA Ann
-				var filename = 'testann1.csv';
-			    movan.selectedFeats[len] =[];
-			    movan.selectedFeats[len].id = len;
-			    movan.selectedFeats[len].featID = sel;
-				movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
-				movan.selectedFeats[len].data = movan.availableFeatures[sel][1](movan.gframes, movan.frameSkip,joint,filename);
-				movan.selectedFeats[len].joint = joint;*/
-
-				movan.reDrawFeat();
+				
+				
+				movan.reDrawFeat();				
 			},
 
 			loadNew: function () {
@@ -217,6 +233,28 @@ var movan = {
 				// console.log(movan.dataTracks[thisTrackIndex].content.getPositionsAt(0)[4]);
 				// console.log(movan.dataTracks[thisTrackIndex].content.getPositionsAt(0)[28]);
 				// console.log(movan.dataTracks[thisTrackIndex].content.getPositionsAt(0)[29]);
+
+
+				// var len = movan.selectedFeats.length;
+				// var sel = 10;
+				// var joint = 0;
+
+				// track = movan.dataTracks[movan.dataTracks.length - 1].content;
+
+				// posFrameArray = [];
+				// for (f=0;f<track.frameCount;f++) {
+				// posFrameArray[f] = track.getPositionsAt(f);
+				// }
+
+				// movan.selectedFeats[len] = [];
+				// movan.selectedFeats[len].id = len;
+				// movan.selectedFeats[len].featID = sel;
+				// movan.selectedFeats[len].f = movan.availableFeatures[sel][0];
+				// //movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, track.jointArray[joint], 0);
+				// movan.selectedFeats[len].data = movan.availableFeatures[sel][1](posFrameArray, movan.frameSkip, joint, 0);
+				// movan.selectedFeats[len].joint = track.jointArray[joint];
+
+				// movan.reDrawFeat();
 			},
 
 			drawJointChooser: function (mocap) {
@@ -286,8 +324,8 @@ var movan = {
 									track, -1, movan.frameSkip, movan.padding);
 
 				// Prep the animation
-				anim.animSVG = anim.makeAnim(d3.select("body").select("#anim"),
-									track, -1, movan.frameSkip, movan.padding);
+				// anim.animSVG = anim.makeAnim(d3.select("body").select("#anim"),
+				// 					track, -1, movan.frameSkip, movan.padding);
 
 				//playAnim = true;
 
