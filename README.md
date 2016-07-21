@@ -1,11 +1,11 @@
-Movement Analytics and Annotation Platform
+Movement Analytics and Annotation Platform -- Performer's Perspective Version
 =======
 
 Mova extracts and visualizes a set of movement features from movement data sequences
 
 More info: [http://omid.al/Mova.html](http://omid.al/Mova.html)
 
-Online demo: [http://www.sfu.ca/~oalemi/movan/](http://www.sfu.ca/~oalemi/movan/)
+Online demo: [http://omid.al/MovaPP](http://omid.al/MovaPP )
 
 
 ## Feedback, Bugs, and Questions
