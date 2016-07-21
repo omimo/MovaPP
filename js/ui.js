@@ -16,7 +16,7 @@ var setSizes = function() {
     $("#righttabs").show();
   }
   else {
-    $("#lefttabs").width(($(document).width() - $("#legends").width() - 70));
+    $("#lefttabs").width(($(document).width()  - 40));
     $("#righttabs").hide();
   }
 
