@@ -1,4 +1,4 @@
-Movement Analytics and Annotation Platform -- Performer's Perspective Version
+Movement Analytics Platform -- Performer's Perspective Edition!
 =======
 
 Mova extracts and visualizes a set of movement features from movement data sequences
